@@ -11,6 +11,7 @@ import { collection } from 'firebase/firestore';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Lobby from './components/Lobby'; 
 import ChatRoom from './components/ChatRoom';
+import CreateRoom from './components/Lobby';
 
 firebase.initializeApp({
   apiKey: "AIzaSyAt76iKg-FGt2M6ppBtZy5PWeA5fui69BY",
@@ -34,15 +35,25 @@ function App() {
     <Router>
     <div className='App'>
       <header className='App-header'>
-      <div><SignOut/></div>
+        
+      
+      <h1 className='app-title '>BuzzRooms</h1>
       </header>
+      
       <section>
         
       {user ? <Routes>
               <Route path="/" element={<Lobby />} />
               <Route path="/room/:id" element={<ChatRoom />} />
-            </Routes>:
-            <SignIn />}
+            </Routes>:<><p className="app-description">
+          Welcome to BuzzRooms – the place where conversations come to life! 
+          Whether you're passionate about specific topics, looking to share ideas, or simply want to meet new people with shared interests, 
+          BuzzRooms lets you create and join chatrooms with ease. 
+          Dive into discussions on anything from the latest trends to niche hobbies or hot debates, and connect with strangers who share your curiosity. 
+          With BuzzRooms, you'll find exciting spaces to chat, engage, and build meaningful conversations on topics that matter to you. 
+          Create your own room or buzz into one – the conversation starts here!
+        </p>
+            <SignIn /></>}
       </section>
     </div>
     </Router>
@@ -55,11 +66,9 @@ function SignIn(){
     auth.signInWithPopup(provider);
   }
 
-  return <button onClick={GoogleSignIn}>Sign In With Google</button>
+  return <button className="sign-in" onClick={GoogleSignIn}>Sign In With Google</button>
 }
-function SignOut(){
-  return auth.currentUser && (<button onClick={()=>{auth.signOut()}}>Sign Out</button>);
-}
+
 
 
 

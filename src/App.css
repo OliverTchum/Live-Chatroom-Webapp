@@ -32,6 +32,32 @@ body {
   min-height: 100vh;
   background-color: #edc7b7;
 }
+.app-description {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  color: #333;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.app-description strong {
+  color: #ff6f61; /* Highlighted color */
+}
+.app-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.5rem;
+  color: white;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
 
 main {
   padding: 10px;
@@ -65,18 +91,22 @@ main::-webkit-scrollbar-thumb {
   font-size: 1.5rem;
 }
 
-.roomcreation{
+.room-creation{
   color:#6649b8 ;
   display: inline-block;
   
+  
 }
-.roomcreation input{
+.room-creation input{
   text-align: center;
   margin: 10px;
-  width:100%;
+  width:80%;
   left:0;
+  color:#ac3b61;
 }
-
+.room-creation button{
+  background-color: #dedce4;
+}
 
 input {
   line-height: 1.5;
@@ -96,7 +126,7 @@ input {
   width:100%;
 }
 button {
-  background-color: #282c34; /* Green */
+  background-color: #282c34; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -112,7 +142,9 @@ button:disabled {
   cursor: not-allowed;
 }
 
-
+.menu-button{
+  margin:0 20px;
+}
 .sign-in {
   color: #282c34;
   background: white;
@@ -237,3 +269,42 @@ form button:hover::before {
   color: #666;
 }
 
+.member-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  color: white;
+  z-index: 1000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.member-item {
+  margin: 10px 0;
+}
+.menu-button {
+  margin: 5px;
+}
+.menu-button:hover {
+  background-color: rgba(190, 167, 167, 0.391) ;
+}
+.close-menu {
+  position: absolute;
+  top: 10px;
+  right: 10vw;
+  background: red;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.member-item:hover{
+  background: rgba(131, 119, 119,0.4);
+}

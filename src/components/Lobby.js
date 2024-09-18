@@ -32,27 +32,41 @@ function Lobby() {
     }
     
      return(
+      
        <div>
-         
-         {!rooms || rooms.length === 0 ? (
-           <h1>No Current Chat Rooms</h1>
-         ) : (
-          <section className="room-grid">
-          {rooms.map((room) => (
-            <Link key={room.id} to={`/room/${room.id}`} onClick={() => joinRoom(room.id)} className="room-card">
-                
-              <h3>{room.name}</h3>
-              <p>Max Size: {room.maxSize}</p>
-              <p>Current Members</p>
-              
-            </Link>
-          ))}
-        </section>
-         )}
-         {showCreateRoom && <CreateRoom />}
+         <header className='App-header'>
+      <div><SignOut/></div>
+      <h1 className='app-title'>BuzzRooms</h1>
          <button onClick={() => setShowCreateRoom(!showCreateRoom)}>
            {showCreateRoom ? "Cancel" : "Create a Room"}
          </button>
+      </header>
+
+
+      {showCreateRoom ? (
+        <CreateRoom />
+      ):
+         !rooms || rooms.length === 0 ? (
+         <>
+           <h1>No Current Chat Rooms</h1>
+           <button onClick={() => setShowCreateRoom(!showCreateRoom)}>
+           {showCreateRoom ? "Cancel" : "Create a Room"}
+         </button>
+         </>
+         ) : (
+          <section className="room-grid">
+          {rooms.map((room) => ( room.currentSize<parseInt(room.maxSize) &&(
+            <Link key={room.id} to={`/room/${room.id}`} onClick={() => joinRoom(room.id)} className="room-card">
+              <h3>{room.name}</h3>
+              <p>Max Size: {room.maxSize}</p>
+              <p>Current Members:{room.currentSize}</p>
+              
+            </Link>)
+          ))} 
+        </section>
+         )} 
+         
+         
        </div>
      );
    }
@@ -69,6 +83,7 @@ function Lobby() {
     const roomDoc= await roomRef.add({
       name:roomNameValue,
       maxSize: maxSizeValue,
+      currentSize:0,
       host:auth.currentUser.uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       
@@ -80,12 +95,14 @@ function Lobby() {
   }
   
     return(
-      <form class="roomcreation" onSubmit={newRoom}>
+      <form className="room-creation" onSubmit={newRoom}>
          <label>room name: <input type='text' required value={roomNameValue} onChange={(e)=> setRoomNameValue(e.target.value)}/></label>
          <label>Max size: <input type='number' min='1' max='20' value={maxSizeValue} onChange={(e)=> setMaxSizeValue(e.target.value)}/></label>
          <button type='submit'>Create Room</button>
       </form>
     )
   }
-
+  function SignOut(){
+    return auth.currentUser && (<button onClick={()=>{auth.signOut()}}>Sign Out</button>);
+  }
   export default Lobby
